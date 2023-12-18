@@ -13,8 +13,8 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     # Définition de la figure et des couleurs
     fig, ax = plt.subplots(1, 3, gridspec_kw={'width_ratios': [20, 1, 1]}, figsize=(12, 10))
     # plt.ion()
-    ax[1].set_title(' Stance', fontsize=10)
-    ax[2].set_title('phase', fontsize=10)
+    ax[1].set_title('    Stance', fontsize=10)
+    ax[2].set_title('phase   ', fontsize=10)
     ax[0].set_yticks([])
     ax[1].set_yticks([])
     ax[1].set_xticks([0])
@@ -158,7 +158,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         #axd.set_xticks([0])
         ax[0].set_title('Angle de rotation du tronc')
 
-        # ax[0].tick_params(axis=u'both', which=u'both', length=0)
+        ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
         e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
         #  ax[0].set_yticklabels(['Debut\nde la\nmarche','Debut \ndemi-tour',e,'Fin\ndemi-tour','Fin\nde la\nmarche'], fontsize=8)
