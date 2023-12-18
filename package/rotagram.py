@@ -33,10 +33,10 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     sc = - data_lb["Gyr_X"]
 
     # Fine black cumulative curve for u-turn
-    cumulative_curve = np.cumsum(sc[segm.iloc[1, 0]-100: segm.iloc[2, 0]+100])
+    cumulative_curve = np.cumsum(sc[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50])
     coef = np.sign(cumulative_curve.iloc[-1])* 180 / cumulative_curve.iloc[-1]
     cumulative_curve = np.sign(cumulative_curve.iloc[-1]) * cumulative_curve * 180 / cumulative_curve.iloc[-1]
-    leg3 = ax[0].plot(cumulative_curve, t[segm.iloc[1, 0]-100: segm.iloc[2, 0]+100], 'k')
+    leg3 = ax[0].plot(cumulative_curve, t[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50], 'k')
 
     W = abs(min(cumulative_curve))
     W1 = abs(max(cumulative_curve))
