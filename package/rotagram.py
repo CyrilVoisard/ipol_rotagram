@@ -150,13 +150,13 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
 
         # Légendes
         # ax[0].title("Angle de rotation du tronc" + ref, fontsize=12)
-        axd = ax[0].twiny()
+        # axd = ax[0].twiny()
         ax[0].set_xticks([-W, (-W / 2), 0, W / 2, W])
         # ax[0].set_xticklabels(['Demi-tour vers la gauche','Demi-tour vers la droite'], fontsize=8)
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
-        axd.set_xlim(ax[0].get_xlim())
+        # axd.set_xlim(ax[0].get_xlim())
         #axd.set_xticks([0])
-        axd.set_title('Angle de rotation du tronc')
+        ax[0].set_title('Angle de rotation du tronc')
 
         # ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
