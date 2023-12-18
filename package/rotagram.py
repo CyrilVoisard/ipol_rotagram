@@ -52,6 +52,8 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
 
     # Plot de la rotation
     for y in range(len(step_r)):
+        print("test", step_r.iloc[y, 3])
+        print("test", segm.iloc[3, 0])
         if (step_r.iloc[y, 3] < segm.iloc[3, 0]):
             # Premier plot
             leg_rf = ([step_r.iloc[y, 2], step_r.iloc[y, 3]] - segm.iloc[1, 0]) / 100
