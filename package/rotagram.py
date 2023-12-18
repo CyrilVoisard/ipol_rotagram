@@ -12,15 +12,15 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     os.chdir(output)
     # Définition de la figure et des couleurs
     fig, ax = plt.subplots(1, 3, gridspec_kw={'width_ratios': [20, 1, 1]}, figsize=(12, 10))
-    plt.ion()
-    ax[1].set_title(' Durée', fontsize=10)
-    ax[2].set_title('d\'appui', fontsize=10)
+    # plt.ion()
+    ax[1].set_title(' Stance', fontsize=10)
+    ax[2].set_title('phase', fontsize=10)
     ax[0].set_yticks([])
     ax[1].set_yticks([])
     ax[1].set_xticks([0])
     ax[2].set_xticks([0])
-    ax[1].set_xticklabels(['Pied\ngauche'], fontsize=8, horizontalalignment='center')
-    ax[2].set_xticklabels(['Pied\ndroit'], fontsize=8, horizontalalignment='center')
+    ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center')
+    ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center')
 
     color_r, line_r = 'blue', '-'
     color_l, line_l = 'red', '-'
@@ -45,9 +45,9 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     W = max(abs(courbe_fine))
 
     if max(courbe_fine) > 100:
-        ax[0].annotate('Demi tour vers la droite', xy=(2, 1), xytext=(30, (-1)), fontsize=10)
+        ax[0].annotate('U-turn to the right', xy=(2, 1), xytext=(30, (-1)), fontsize=10)
     else:
-        ax[0].annotate('Demi tour vers la gauche', xy=(2, 1), xytext=(-W + 30, (-1)), fontsize=10)
+        ax[0].annotate('U-turn to the left', xy=(2, 1), xytext=(-W + 30, (-1)), fontsize=10)
 
 
     # Plot de la rotation
@@ -73,12 +73,12 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
             #print(np.cumsum(sc[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))]) * coef)
             #print(t[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))])
 
-            ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
-                       t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
-                       line_l, linewidth=3, color=color_l)
-            #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
-             #          t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
+            #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
+             #          t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
               #         line_l, linewidth=3, color=color_l)
+            ax[0].plot(- np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
+                       t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
+                       line_l, linewidth=3, color=color_l)
 
         # Coloration des aires de la figure
         ax[0].add_patch(
@@ -158,7 +158,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         #axd.set_xticks([0])
         axd.set_title('Angle de rotation du tronc')
 
-        ax[0].tick_params(axis=u'both', which=u'both', length=0)
+        # ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
         e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
         #  ax[0].set_yticklabels(['Debut\nde la\nmarche','Debut \ndemi-tour',e,'Fin\ndemi-tour','Fin\nde la\nmarche'], fontsize=8)
@@ -171,7 +171,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
              ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) + 0.5,
              ((segm.iloc[3, 0] - segm.iloc[1, 0]) / 100) - 1.1])
         e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
-        ax[2].set_yticklabels(['Debut\nde la\nmarche', 'Debut\ndemi-tour', e, 'Fin\ndemi-tour', 'Fin\nde la\nmarche'],
+        ax[2].set_yticklabels(['Gait\nstart', 'U-Turn\nstart', e, 'U-Turn\nend', 'Gait\nend'],
                               fontsize=8)
         ax[2].tick_params(axis=u'both', which=u'both', length=0)
         ax[2].spines['left'].set_visible(False)
