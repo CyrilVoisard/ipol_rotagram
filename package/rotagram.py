@@ -15,10 +15,10 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     plt.ion()
     ax[1].set_title(' Durée', fontsize=10)
     ax[2].set_title('d\'appui', fontsize=10)
-    #ax[0].set_yticks([])
-    #ax[1].set_yticks([])
-    #ax[1].set_xticks([0])
-    #ax[2].set_xticks([0])
+    ax[0].set_yticks([])
+    ax[1].set_yticks([])
+    ax[1].set_xticks([0])
+    ax[2].set_xticks([0])
     ax[1].set_xticklabels(['Pied\ngauche'], fontsize=8, horizontalalignment='center')
     ax[2].set_xticklabels(['Pied\ndroit'], fontsize=8, horizontalalignment='center')
 
@@ -33,7 +33,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     sc = - signal_tr.iloc[:, 8]  # Le négatif sert à avoir la droite en haut
 
     # Courbe cumulée noire fine
-    courbe_fine = np.cumsum(sc[segm.iloc[1, 0] - 100: segm.iloc[2, 0] + 100])
+    courbe_fine = np.cumsum(sc[segm.iloc[1, 0]: segm.iloc[2, 0]])
     coef = np.sign(courbe_fine.iloc[-1])* 180 / courbe_fine.iloc[-1]
     courbe_fine = np.sign(courbe_fine.iloc[-1]) * courbe_fine * 180 / courbe_fine.iloc[-1]
     leg3 = ax[0].plot(courbe_fine, t[segm.iloc[1, 0] - 100: segm.iloc[2, 0] + 100], 'k')
@@ -73,12 +73,12 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
             #print(np.cumsum(sc[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))]) * coef)
             #print(t[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))])
 
-            #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
-             #          t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
-              #         line_l, linewidth=3, color=color_l)
-            ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
-                       t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
+            ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
+                       t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
                        line_l, linewidth=3, color=color_l)
+            #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
+             #          t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
+              #         line_l, linewidth=3, color=color_l)
 
         # Coloration des aires de la figure
         ax[0].add_patch(
@@ -156,7 +156,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
         axd.set_xlim(ax[0].get_xlim())
         #axd.set_xticks([0])
-        axd.set_title(['Angle de rotation du tronc'])
+        axd.set_title('Angle de rotation du tronc')
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
