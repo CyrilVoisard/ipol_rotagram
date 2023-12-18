@@ -165,7 +165,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         # # ax[0].set_ylabel('Pied gauche'),rotation=90
         ax[1].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].spines['left'].set_visible(False)
-        ax[1].spines['left'].set_visible(False)
+        ax[1].spines['right'].set_visible(False)
         ax[2].set_yticks(
             [((segm.iloc[0, 0] - segm.iloc[1, 0]) / 100) + 1.1, -0.5, ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) / 2,
              ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) + 0.5,
