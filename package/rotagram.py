@@ -61,10 +61,8 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
                        t[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
 
-    print("test", step_l)
-    print("test", step_l["TO"])
     for y in range(len(step_l)-1):
-        if (step_l["TO"].tolist()[y+1] <= 2*segm.iloc[3, 0]):
+        if (step_l["TO"].tolist()[y+1] - segm.iloc[1, 0])*(step_l["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
             # leg_lf = ([step_l["HS"].tolist()[y]  - len(signal_tr), step_l["TO"].tolist()[y+1] - len(signal_tr)] - segm.iloc[1, 0]) / 100
             leg_lf = ([step_l["HS"].tolist()[y], step_l["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=3, color=color_l)
