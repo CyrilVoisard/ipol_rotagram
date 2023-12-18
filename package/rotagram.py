@@ -22,7 +22,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center')
     ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center')
 
-    linewidth=1
+    linewidth=3
     color_r, line_r = 'blue', '-'
     color_l, line_l = 'red', '-'
     color_r_2, line_r = 'green', '-'
@@ -39,7 +39,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     cumulative_curve = np.cumsum(sc[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50])
     coef = np.sign(cumulative_curve.iloc[-1])* 180 / cumulative_curve.iloc[-1]
     cumulative_curve = np.sign(cumulative_curve.iloc[-1]) * cumulative_curve * 180 / cumulative_curve.iloc[-1]
-    leg3 = ax[0].plot(cumulative_curve, t[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50], 'k')
+    leg3 = ax[0].plot(cumulative_curve, t[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50], 'k', linewidth=2)
 
     W = abs(min(cumulative_curve))
     W1 = abs(max(cumulative_curve))
