@@ -27,7 +27,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
 
     # Un tableau pour le pied droit, un pour le pied gauche
     step_r = steps_lim_bis[steps_lim_bis["Foot"]== 1]
-    step_l = steps_lim_bis[steps_lim_bis.iloc[:, 0] == 0]
+    step_l = steps_lim_bis[steps_lim_bis["Foot"] == 0]
 
     t = ((signal_tr.iloc[:, 0] - signal_tr.iloc[0, 0]) - segm.iloc[1, 0]) / 100
     sc = - signal_tr.iloc[:, 8]  # Le négatif sert à avoir la droite en haut
@@ -56,11 +56,11 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         print("test", segm.iloc[3, 0])
         if (step_r.iloc[y, 3] < segm.iloc[3, 0]):
             # Premier plot
-            leg_rf = ([step_r.iloc[y, 2], step_r.iloc[y, 3]] - segm.iloc[1, 0]) / 100
+            leg_rf = ([step_r["HS"][y], step_r["TO"][y]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
 
-            ax[0].plot(np.cumsum(sc[int(step_r.iloc[y, 2]):int(step_r.iloc[y, 3])]) * coef,
-                       t[int(step_r.iloc[y, 2]):int(step_r.iloc[y, 3])],
+            ax[0].plot(np.cumsum(sc[int(step_r["HS"][y]):int(step_r["TO"][y])]) * coef,
+                       t[int(step_r["HS"][y]):int(step_r["TO"][y])],
                        line_r, linewidth=3, color=color_r)
 
     for y in range(len(step_l)):
