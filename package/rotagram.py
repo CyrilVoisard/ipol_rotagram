@@ -13,14 +13,14 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     # Définition de la figure et des couleurs
     fig, ax = plt.subplots(1, 3, gridspec_kw={'width_ratios': [20, 1, 1]}, figsize=(12, 10))
     # plt.ion()
-    ax[1].set_title('    Stance', fontsize=10)
-    ax[2].set_title('phase   ', fontsize=10)
+    ax[1].set_title('        Stance', fontsize=10, weight='bold')
+    ax[2].set_title('phase       ', fontsize=10, weight='bold')
     ax[0].set_yticks([])
     ax[1].set_yticks([])
     ax[1].set_xticks([0])
     ax[2].set_xticks([0])
-    ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center', weight='bold')
-    ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center', weight='bold')
+    ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center')
+    ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center')
 
     color_r, line_r = 'blue', '-'
     color_l, line_l = 'red', '-'
@@ -45,9 +45,9 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     W = max(abs(courbe_fine))
 
     if max(courbe_fine) > 100:
-        ax[0].annotate('U-turn to the right', xy=(2, 1), xytext=(30, (-1)), fontsize=10)
+        ax[0].annotate('U-turn to the right', xy=(2, 1), xytext=(30, (-1)), fontsize=10, weight='bold')
     else:
-        ax[0].annotate('U-turn to the left', xy=(2, 1), xytext=(-W + 30, (-1)), fontsize=10)
+        ax[0].annotate('U-turn to the left', xy=(2, 1), xytext=(-W + 30, (-1)), fontsize=10, weight='bold')
 
 
     # Plot de la rotation
