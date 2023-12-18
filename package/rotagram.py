@@ -61,6 +61,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
                        t[int(step_r["HS"][y]):int(step_r["TO"][y+1])],
                        line_r, linewidth=3, color=color_r)
 
+    print("test", step_l)
     for y in range(len(step_l)-1):
         print("test", step_l["TO"][y], step_l["HS"][y+1])
         print("test", segm.iloc[3, 0])
