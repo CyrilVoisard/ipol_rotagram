@@ -7,8 +7,8 @@ import pandas as pd
 import os
 
 
-def rotagram(steps_lim_bis, segm, data_lb, output):
-    segm = pd.DataFrame(segm)
+def rotagram(steps_lim_bis, seg_lim, data_lb, output):
+    seg_lim = pd.DataFrame(seg_lim)
     os.chdir(output)
     
     # figure and color definition
@@ -32,14 +32,14 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     events_right = steps_lim_bis[steps_lim_bis["Foot"]== 1]
     events_left = steps_lim_bis[steps_lim_bis["Foot"] == 0]
 
-    t = data_lb["PacketCounter"] - segm.iloc[1, 0]/ 100
+    t = data_lb["PacketCounter"] - seg_lim.iloc[1, 0]/ 100
     sc = - data_lb["Gyr_X"]
 
     # Fine black cumulative curve for u-turn
-    cumulative_curve = np.cumsum(sc[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50])
+    cumulative_curve = np.cumsum(sc[seg_lim.iloc[1, 0]-50: seg_lim.iloc[2, 0]+50])
     coef = np.sign(cumulative_curve.iloc[-1])* 180 / cumulative_curve.iloc[-1]
     cumulative_curve = np.sign(cumulative_curve.iloc[-1]) * cumulative_curve * 180 / cumulative_curve.iloc[-1]
-    leg3 = ax[0].plot(cumulative_curve, t[segm.iloc[1, 0]-50: segm.iloc[2, 0]+50], 'k', linewidth=2)
+    leg3 = ax[0].plot(cumulative_curve, t[seg_lim.iloc[1, 0]-50: seg_lim.iloc[2, 0]+50], 'k', linewidth=2)
 
     W = abs(min(cumulative_curve))
     W1 = abs(max(cumulative_curve))
@@ -56,11 +56,11 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     # rotation plot for each stance phase
     for y in range(len(events_right)):
         if y != len(events_right)-1:
-            if (events_right["TO"].tolist()[y+1] - segm.iloc[1, 0])*(events_right["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
+            if inside(events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1], seg_lim):
             # plot
-                leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
+                leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
                 leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=linewidth, color=color_r)
-        if (events_right["TO"].tolist()[y+1] - segm.iloc[1, 0])*(events_right["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
+        if inside(events_right["TO"].tolist()[y], events_right["HS"].tolist()[y], seg_lim):
             """
             ax[0].plot(np.cumsum(sc[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])]) * coef,
                        t[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])],
@@ -72,11 +72,11 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
 
     for y in range(len(events_left)):
         if y != len(events_left)-1:
-            if (events_left["TO"].tolist()[y+1] - segm.iloc[2, 0])*(events_left["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
-            # leg_lf = ([events_left["HS"].tolist()[y]  - len(data_lb), events_left["TO"].tolist()[y+1] - len(data_lb)] - segm.iloc[1, 0]) / 100
-                leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
+            if inside(events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1], seg_lim):
+            # leg_lf = ([events_left["HS"].tolist()[y]  - len(data_lb), events_left["TO"].tolist()[y+1] - len(data_lb)] - seg_lim.iloc[1, 0]) / 100
+                leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
                 leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=linewidth, color=color_l)
-        if (events_left["TO"].tolist()[y+1] - segm.iloc[2, 0])*(events_left["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
+        if inside(events_left["TO"].tolist()[y], events_left["HS"].tolist()[y], seg_lim):
             """
             ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))]) * coef,
                        t[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))],
@@ -92,18 +92,18 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
         # coloring the areas of the figure
         ax[0].add_patch(
             patches.Rectangle(
-                (-W, (segm.iloc[0, 0] - segm.iloc[1, 0]) / 100),  # (x,y)
+                (-W, (seg_lim.iloc[0, 0] - seg_lim.iloc[1, 0]) / 100),  # (x,y)
                 W,  # width
-                (segm.iloc[3, 0] - segm.iloc[0, 0]) / 100,  # height
+                (seg_lim.iloc[3, 0] - seg_lim.iloc[0, 0]) / 100,  # height
                 facecolor="red",
                 alpha=0.01
             )
         )
         ax[0].add_patch(
             patches.Rectangle(
-                (0, (segm.iloc[0, 0] - segm.iloc[1, 0]) / 100),  # (x,y)
+                (0, (seg_lim.iloc[0, 0] - seg_lim.iloc[1, 0]) / 100),  # (x,y)
                 W,  # width
-                (segm.iloc[3, 0] - segm.iloc[0, 0]) / 100,  # height
+                (seg_lim.iloc[3, 0] - seg_lim.iloc[0, 0]) / 100,  # height
                 alpha=0.01,
                 color=color_r
             )
@@ -112,7 +112,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             patches.Rectangle(
                 (-W, 0),  # (x,y)
                 W * 2,  # width
-                (segm.iloc[2, 0] - segm.iloc[1, 0]) / 100,  # height
+                (seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100,  # height
                 alpha=0.1,
                 facecolor="yellow", linestyle='dotted'
             )
@@ -120,9 +120,9 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
 
         ax[1].add_patch(
             patches.Rectangle(
-                (-W, (segm.iloc[0, 0] - segm.iloc[1, 0]) / 100),  # (x,y)
+                (-W, (seg_lim.iloc[0, 0] - seg_lim.iloc[1, 0]) / 100),  # (x,y)
                 W * 2,  # width
-                (segm.iloc[3, 0] - segm.iloc[0, 0]) / 100,  # height
+                (seg_lim.iloc[3, 0] - seg_lim.iloc[0, 0]) / 100,  # height
                 alpha=0.01,
                 facecolor="red"
             )
@@ -132,7 +132,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             patches.Rectangle(
                 (-W, 0),  # (x,y)
                 W * 2,  # width
-                (segm.iloc[2, 0] - segm.iloc[1, 0]) / 100,  # height
+                (seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100,  # height
                 alpha=0.1,
                 facecolor="yellow", linestyle='dotted'
             )
@@ -140,9 +140,9 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
 
         ax[2].add_patch(
             patches.Rectangle(
-                (-W, (segm.iloc[0, 0] - segm.iloc[1, 0]) / 100),  # (x,y)
+                (-W, (seg_lim.iloc[0, 0] - seg_lim.iloc[1, 0]) / 100),  # (x,y)
                 W * 2,  # width
-                (segm.iloc[3, 0] - segm.iloc[0, 0]) / 100,  # height
+                (seg_lim.iloc[3, 0] - seg_lim.iloc[0, 0]) / 100,  # height
                 alpha=0.01,
                 facecolor="blue"
             )
@@ -151,7 +151,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             patches.Rectangle(
                 (-W, 0),  # (x,y)
                 W * 2,  # width
-                (segm.iloc[2, 0] - segm.iloc[1, 0]) / 100,  # height
+                (seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100,  # height
                 alpha=0.1,
                 facecolor="yellow", linestyle='dotted'
             )
@@ -164,14 +164,14 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
         ax[0].set_title('Trunk rotation angle (axial plane)', weight='bold', size=10)
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
-        e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
+        e = str(((seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100)) + 's.'
         ax[1].tick_params(axis=u'both', which=u'both', length=0)
         ax[1].spines['right'].set_visible(False)
         ax[2].set_yticks(
-            [((segm.iloc[0, 0] - segm.iloc[1, 0]) / 100) + 1.1, -0.5, ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) / 2,
-             ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) + 0.5,
-             ((segm.iloc[3, 0] - segm.iloc[1, 0]) / 100) - 1.1])
-        e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
+            [((seg_lim.iloc[0, 0] - seg_lim.iloc[1, 0]) / 100) + 1.1, -0.5, ((seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100) / 2,
+             ((seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100) + 0.5,
+             ((seg_lim.iloc[3, 0] - seg_lim.iloc[1, 0]) / 100) - 1.1])
+        e = str(((seg_lim.iloc[2, 0] - seg_lim.iloc[1, 0]) / 100)) + 's.'
         ax[2].set_yticklabels(['Gait\nstart', 'U-Turn\nstart', e, 'U-Turn\nend', 'Gait\nend'],
                               fontsize=8)
         ax[2].tick_params(axis=u'both', which=u'both', length=0)
@@ -184,3 +184,21 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
     plt.savefig(fname=("rota.svg"))
 
     return None
+
+
+def inside(ge_1, ge_2, seg_lim): 
+    if ge_1 > ge_2:
+        ge_1, ge_2 = ge_2, ge_1
+    if ge_1 <= seg_lim.iloc[1, 0]:
+        if ge_1 <= seg_lim.iloc[1, 0]:
+            return True
+        else:
+            if ge_1 > seg_lim.iloc[2, 0]:
+                return False
+            else: 
+                return True
+    else: 
+        return True
+    
+        
+    
