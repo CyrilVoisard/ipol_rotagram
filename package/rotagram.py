@@ -188,10 +188,10 @@ def inside(ge_1, ge_2, seg_lim):
     if ge_1 > ge_2:
         ge_1, ge_2 = ge_2, ge_1
     if ge_1 <= seg_lim.iloc[1, 0]:
-        if ge_1 <= seg_lim.iloc[1, 0]:
+        if ge_2 <= seg_lim.iloc[1, 0]:
             return True
         else:
-            if ge_1 > seg_lim.iloc[2, 0]:
+            if ge_2 > seg_lim.iloc[2, 0]:
                 return False
             else: 
                 return True
