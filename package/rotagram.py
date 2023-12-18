@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 
-def rotagram(steps_lim_bis, segm, signal_tr, signal_rfn, ref, output):
+def rotagram(steps_lim_bis, segm, signal_tr, output):
     os.chdir(output)
     # Définition de la figure et des couleurs
     fig, ax = plt.subplots(1, 3, gridspec_kw={'width_ratios': [20, 1, 1]}, figsize=(12, 10))
@@ -61,15 +61,15 @@ def rotagram(steps_lim_bis, segm, signal_tr, signal_rfn, ref, output):
 
     for y in range(len(step_l)):
         if (step_l.iloc[y, 3] < 2*segm.iloc[3, 0]):
-            leg_lf = ([step_l.iloc[y, 2]  - len(signal_rfn), step_l.iloc[y, 3] - len(signal_rfn)] - segm.iloc[1, 0]) / 100
+            leg_lf = ([step_l.iloc[y, 2]  - len(signal_tr), step_l.iloc[y, 3] - len(signal_tr)] - segm.iloc[1, 0]) / 100
             leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=3, color=color_l)
 
-            print("len", len(t), int(step_l.iloc[y, 2]),int(step_l.iloc[y, 3]), len(sc[int(step_l.iloc[y, 2] - len(signal_rfn)):int(step_l.iloc[y, 3] - len(signal_rfn))]), len(leg_lf))
-            print(np.cumsum(sc[int(step_l.iloc[y, 2] - len(signal_rfn)):int(step_l.iloc[y, 3] - len(signal_rfn))]) * coef)
-            print(t[int(step_l.iloc[y, 2] - len(signal_rfn)):int(step_l.iloc[y, 3] - len(signal_rfn))])
+            print("len", len(t), int(step_l.iloc[y, 2]),int(step_l.iloc[y, 3]), len(sc[int(step_l.iloc[y, 2] - len(signal_tr)):int(step_l.iloc[y, 3] - len(signal_tr))]), len(leg_lf))
+            print(np.cumsum(sc[int(step_l.iloc[y, 2] - len(signal_tr)):int(step_l.iloc[y, 3] - len(signal_tr))]) * coef)
+            print(t[int(step_l.iloc[y, 2] - len(signal_tr)):int(step_l.iloc[y, 3] - len(signal_tr))])
 
-            ax[0].plot(np.cumsum(sc[int(step_l.iloc[y, 2] - len(signal_rfn)):int(step_l.iloc[y, 3] - len(signal_rfn))]) * coef,
-                       t[int(step_l.iloc[y, 2] - len(signal_rfn)):int(step_l.iloc[y, 3] - len(signal_rfn))],
+            ax[0].plot(np.cumsum(sc[int(step_l.iloc[y, 2] - len(signal_tr)):int(step_l.iloc[y, 3] - len(signal_tr))]) * coef,
+                       t[int(step_l.iloc[y, 2] - len(signal_tr)):int(step_l.iloc[y, 3] - len(signal_tr))],
                        line_l, linewidth=3, color=color_l)
 
         # Coloration des aires de la figure
@@ -148,7 +148,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, signal_rfn, ref, output):
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
         axd.set_xlim(ax[0].get_xlim())
         axd.set_xticks([0])
-        axd.set_xticklabels(['Angle de rotation du tronc pour ' + ref])
+        axd.set_xticklabels(['Angle de rotation du tronc'])
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
@@ -177,6 +177,6 @@ def rotagram(steps_lim_bis, segm, signal_tr, signal_rfn, ref, output):
     # On est déjà dans le bon répertoire
     plt.show()
     plt.ioff()
-    plt.savefig(fname=(ref + "_rotagram.png"))
+    plt.savefig(fname=("rota.svg"))
 
     return None
