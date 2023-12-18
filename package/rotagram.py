@@ -19,8 +19,8 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     ax[1].set_yticks([])
     ax[1].set_xticks([0])
     ax[2].set_xticks([0])
-    ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center')
-    ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center')
+    ax[1].set_xticklabels(['Left\nfoot'], fontsize=8, horizontalalignment='center', weight='bold')
+    ax[2].set_xticklabels(['Right\nfoot'], fontsize=8, horizontalalignment='center', weight='bold')
 
     color_r, line_r = 'blue', '-'
     color_l, line_l = 'red', '-'
@@ -156,7 +156,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
         # axd.set_xlim(ax[0].get_xlim())
         #axd.set_xticks([0])
-        ax[0].set_title('Angle de rotation du tronc')
+        ax[0].set_title('Trunk rotation angle', weight='bold', size=15)
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
@@ -164,7 +164,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         #  ax[0].set_yticklabels(['Debut\nde la\nmarche','Debut \ndemi-tour',e,'Fin\ndemi-tour','Fin\nde la\nmarche'], fontsize=8)
         # # ax[0].set_ylabel('Pied gauche'),rotation=90
         ax[1].tick_params(axis=u'both', which=u'both', length=0)
-        ax[0].spines['left'].set_visible(False)
+        # ax[0].spines['left'].set_visible(False)
         ax[1].spines['left'].set_visible(False)
         ax[2].set_yticks(
             [((segm.iloc[0, 0] - segm.iloc[1, 0]) / 100) + 1.1, -0.5, ((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100) / 2,
