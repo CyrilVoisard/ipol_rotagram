@@ -22,7 +22,7 @@ def load_XSens(filename, freq):
         signal
     """
     
-    signal = pd.read_csv(filename, delimiter="\t", skiprows=1, header=0)
+    signal = pd.read_csv(filename, delimiter="\t", skiprows=1, header=0, delim_whitespace=True)
     t = signal["PacketCounter"]
     t_0 = t[0]
     t_fin = t[len(t) - 1]
