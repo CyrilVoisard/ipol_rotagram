@@ -58,11 +58,11 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             # plot
             leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
-            """"
+            """
             ax[0].plot(np.cumsum(sc[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])]) * coef,
                        t[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
-            """"
+            """
             ax[0].plot(np.cumsum(sc[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])]) * coef,
                        t[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])],
                        line_r, linewidth=3, color=color_r_2)
