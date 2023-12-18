@@ -29,9 +29,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     step_r = steps_lim_bis[steps_lim_bis["Foot"]== 1]
     step_l = steps_lim_bis[steps_lim_bis["Foot"] == 0]
 
-    t = ((signal_tr["PacketCounter"] - signal_tr.iloc[0, 0]) - segm.iloc[1, 0]) / 100
-    print("time", t)
-    print(a)
+    t = signal_tr["PacketCounter"] - segm.iloc[1, 0]/ 100
     sc = - signal_tr.iloc[:, 8]  # Le négatif sert à avoir la droite en haut
 
     # Courbe cumulée noire fine
