@@ -57,7 +57,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
             leg_rf = ([step_r["HS"].tolist()[y], step_r["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
 
-            ax[0].plot(np.cumsum(sc[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])]) * coef,
+            ax[0].plot(-np.cumsum(sc[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])]) * coef,
                        t[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
 
@@ -76,7 +76,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
             #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
              #          t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
               #         line_l, linewidth=3, color=color_l)
-            ax[0].plot(- np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
+            ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
                        t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
                        line_l, linewidth=3, color=color_l)
 
