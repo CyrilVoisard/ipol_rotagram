@@ -15,10 +15,10 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     plt.ion()
     ax[1].set_title(' Durée', fontsize=10)
     ax[2].set_title('d\'appui', fontsize=10)
-    ax[0].set_yticks([])
-    ax[1].set_yticks([])
-    ax[1].set_xticks([0])
-    ax[2].set_xticks([0])
+    #ax[0].set_yticks([])
+    #ax[1].set_yticks([])
+    #ax[1].set_xticks([0])
+    #ax[2].set_xticks([0])
     ax[1].set_xticklabels(['Pied\ngauche'], fontsize=8, horizontalalignment='center')
     ax[2].set_xticklabels(['Pied\ndroit'], fontsize=8, horizontalalignment='center')
 
@@ -155,7 +155,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         # ax[0].set_xticklabels(['Demi-tour vers la gauche','Demi-tour vers la droite'], fontsize=8)
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
         axd.set_xlim(ax[0].get_xlim())
-        axd.set_xticks([0])
+        #axd.set_xticks([0])
         axd.set_title(['Angle de rotation du tronc'])
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
