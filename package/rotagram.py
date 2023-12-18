@@ -156,7 +156,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
         # axd.set_xlim(ax[0].get_xlim())
         #axd.set_xticks([0])
-        ax[0].set_title('Trunk rotation angle', weight='bold', size=15)
+        ax[0].set_title('Trunk rotation angle', weight='bold', size=10)
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
         # ax[0].set_yticks([((segm[0] - segm[1]) / 100)+1.1, -0.5,((segm[2] - segm[1]) / 100)/2,((segm[2] - segm[1]) / 100)+0.5,((segm[3] - segm[1]) / 100)-1.1])
