@@ -54,28 +54,30 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     for y in range(len(step_r)-1):
         if (step_r["TO"][y+1] <= segm.iloc[3, 0]):
             # Premier plot
-            leg_rf = ([step_r["HS"][y], step_r["TO"][y+1]] - segm.iloc[1, 0]) / 100
+            leg_rf = ([step_r["HS"].tolist()[y], step_r["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
 
-            ax[0].plot(np.cumsum(sc[int(step_r["HS"][y]):int(step_r["TO"][y+1])]) * coef,
-                       t[int(step_r["HS"][y]):int(step_r["TO"][y+1])],
+            ax[0].plot(np.cumsum(sc[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])]) * coef,
+                       t[int(step_r["HS"].tolist()[y]):int(step_r["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
 
     print("test", step_l)
     print("test", step_l["TO"])
     for y in range(len(step_l)-1):
-        print("test", step_l["TO"].tolist()[y], step_l["HS"].tolist()[y+1])
-        print("test", segm.iloc[3, 0])
         if (step_l["TO"][y+1] <= 2*segm.iloc[3, 0]):
-            leg_lf = ([step_l["HS"][y]  - len(signal_tr), step_l["TO"][y+1] - len(signal_tr)] - segm.iloc[1, 0]) / 100
+            # leg_lf = ([step_l["HS"].tolist()[y]  - len(signal_tr), step_l["TO"].tolist()[y+1] - len(signal_tr)] - segm.iloc[1, 0]) / 100
+            leg_lf = ([step_l["HS"].tolist()[y], step_l["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=3, color=color_l)
 
             #print("len", len(t), int(step_l["HS"][y]),int(step_l["TO"][y+1]), len(sc[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))]), len(leg_lf))
             #print(np.cumsum(sc[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))]) * coef)
             #print(t[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))])
 
-            ax[0].plot(np.cumsum(sc[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))]) * coef,
-                       t[int(step_l["HS"][y] - len(signal_tr)):int(step_l["TO"][y+1] - len(signal_tr))],
+            #ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))]) * coef,
+             #          t[int(step_l["HS"].tolist()[y] - len(signal_tr)):int(step_l["TO"].tolist()[y+1] - len(signal_tr))],
+              #         line_l, linewidth=3, color=color_l)
+            ax[0].plot(np.cumsum(sc[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])]) * coef,
+                       t[int(step_l["HS"].tolist()[y]):int(step_l["TO"].tolist()[y+1])],
                        line_l, linewidth=3, color=color_l)
 
         # Coloration des aires de la figure
