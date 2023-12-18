@@ -54,7 +54,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     for y in range(len(step_r)):
         print("test", step_r["HS"][y], step_r["TO"][y])
         print("test", segm.iloc[3, 0])
-        if (step_r.iloc[y, 3] < segm.iloc[3, 0]):
+        if (step_r["HS"][y] < segm.iloc[3, 0]):
             # Premier plot
             leg_rf = ([step_r["HS"][y], step_r["TO"][y]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
