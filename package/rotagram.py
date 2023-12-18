@@ -143,10 +143,10 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
         )
 
         # Légendes
-        fig.suptitle('Rotagram', fontsize=13)
+        fig.suptitle('Rotagram', fontsize=13, weight='bold')
         ax[0].set_xticks([-W, (-W / 2), 0, W / 2, W])
         ax[0].set_xticklabels(['180°', '90°', '0°', '90°', '180°'], fontsize=8)
-        ax[0].set_title('Trunk rotation angle', weight='bold', size=10)
+        ax[0].set_title('Trunk rotation angle (axial plane)', weight='bold', size=10)
 
         ax[0].tick_params(axis=u'both', which=u'both', length=0)
         e = str(((segm.iloc[2, 0] - segm.iloc[1, 0]) / 100)) + 's.'
