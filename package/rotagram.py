@@ -26,7 +26,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     color_l, line_l = 'red', '-'
 
     # Un tableau pour le pied droit, un pour le pied gauche
-    step_r = steps_lim_bis[steps_lim_bis.iloc[:, 0] == 1]
+    step_r = steps_lim_bis[steps_lim_bis["Foot"]== 1]
     step_l = steps_lim_bis[steps_lim_bis.iloc[:, 0] == 0]
 
     t = ((signal_tr.iloc[:, 0] - signal_tr.iloc[0, 0]) - segm.iloc[1, 0]) / 100
