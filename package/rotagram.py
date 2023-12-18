@@ -63,7 +63,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
                        t[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
             ax[0].plot(np.cumsum(sc[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])]) * coef,
-                       t[int(events_right["TO"].tolist()[y]):int(events_right["hS"].tolist()[y])],
+                       t[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])],
                        line_r, linewidth=3, color=color_r_2)
 
     for y in range(len(events_left)-1):
