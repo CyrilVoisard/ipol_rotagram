@@ -58,10 +58,11 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             # plot
             leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=3, color=color_r)
-
+            """"
             ax[0].plot(np.cumsum(sc[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])]) * coef,
                        t[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])],
                        line_r, linewidth=3, color=color_r)
+            """"
             ax[0].plot(np.cumsum(sc[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])]) * coef,
                        t[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])],
                        line_r, linewidth=3, color=color_r_2)
@@ -71,12 +72,13 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             # leg_lf = ([events_left["HS"].tolist()[y]  - len(data_lb), events_left["TO"].tolist()[y+1] - len(data_lb)] - segm.iloc[1, 0]) / 100
             leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=3, color=color_l)
-
+            """"
             ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))]) * coef,
                        t[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))],
                        line_l, linewidth=3, color=color_l)
-            ax[0].plot(np.cumsum(sc[int(events_left["TO"].tolist()[y] - len(data_lb)):int(events_left["HS"].tolist()[y] - len(data_lb))]) * coef,
-                       t[int(events_left["TO"].tolist()[y] - len(data_lb)):int(events_left["HS"].tolist()[y] - len(data_lb))],
+                       """"
+            ax[0].plot(np.cumsum(sc[int(events_left["TO"].tolist()[y]):int(events_left["HS"].tolist()[y])]) * coef,
+                       t[int(events_left["TO"].tolist()[y]):int(events_left["HS"].tolist()[y])],
                        line_l, linewidth=3, color=color_l_2)
             # ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])]) * coef,
               #         t[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])],
