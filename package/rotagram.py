@@ -67,12 +67,12 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
             leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=3, color=color_l)
 
-            #ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))]) * coef,
-             #          t[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))],
-              #         line_l, linewidth=3, color=color_l)
-            ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])]) * coef,
-                       t[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])],
+            ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))]) * coef,
+                       t[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))],
                        line_l, linewidth=3, color=color_l)
+            # ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])]) * coef,
+              #         t[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])],
+               #        line_l, linewidth=3, color=color_l)
 
         # coloring the areas of the figure
         ax[0].add_patch(
