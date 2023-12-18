@@ -55,7 +55,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
 
     # rotation plot for each stance phase
     for y in range(len(events_right)):
-        if y != len(events_right):
+        if y != len(events_right)-1:
             if (events_right["TO"].tolist()[y+1] - segm.iloc[1, 0])*(events_right["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
             # plot
                 leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
@@ -71,7 +71,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
                        line_r, linewidth=linewidth, color=color_r)
 
     for y in range(len(events_left)):
-        if y != len(events_left):
+        if y != len(events_left)-1:
             if (events_left["TO"].tolist()[y+1] - segm.iloc[2, 0])*(events_left["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
             # leg_lf = ([events_left["HS"].tolist()[y]  - len(data_lb), events_left["TO"].tolist()[y+1] - len(data_lb)] - segm.iloc[1, 0]) / 100
                 leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - segm.iloc[1, 0]) / 100
