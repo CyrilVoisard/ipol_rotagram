@@ -7,6 +7,7 @@ import os
 
 
 def rotagram(steps_lim_bis, segm, signal_tr, output):
+    segm = pd.DataFrame(segm)
     os.chdir(output)
     # Définition de la figure et des couleurs
     fig, ax = plt.subplots(1, 3, gridspec_kw={'width_ratios': [20, 1, 1]}, figsize=(12, 10))
