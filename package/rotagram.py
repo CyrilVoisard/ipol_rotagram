@@ -36,7 +36,7 @@ def rotagram(steps_lim_bis, segm, signal_tr, output):
     courbe_fine = np.cumsum(sc[segm.iloc[1, 0]: segm.iloc[2, 0]])
     coef = np.sign(courbe_fine.iloc[-1])* 180 / courbe_fine.iloc[-1]
     courbe_fine = np.sign(courbe_fine.iloc[-1]) * courbe_fine * 180 / courbe_fine.iloc[-1]
-    leg3 = ax[0].plot(courbe_fine, t[segm.iloc[1, 0] - 100: segm.iloc[2, 0] + 100], 'k')
+    leg3 = ax[0].plot(courbe_fine, t[segm.iloc[1, 0]: segm.iloc[2, 0]], 'k')
 
     W = abs(min(courbe_fine))
     W1 = abs(max(courbe_fine))
