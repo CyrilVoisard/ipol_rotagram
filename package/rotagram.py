@@ -65,7 +65,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             """
             ax[0].plot(np.cumsum(sc[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])]) * coef,
                        t[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])],
-                       line_r, linewidth=3, color=color_r_2)
+                       line_r, linewidth=3, color=color_r)
 
     for y in range(len(events_left)-1):
         if (events_left["TO"].tolist()[y+1] - segm.iloc[1, 0])*(events_left["HS"].tolist()[y] - segm.iloc[1, 0]) > 0:
@@ -79,7 +79,7 @@ def rotagram(steps_lim_bis, segm, data_lb, output):
             """
             ax[0].plot(np.cumsum(sc[int(events_left["TO"].tolist()[y]):int(events_left["HS"].tolist()[y])]) * coef,
                        t[int(events_left["TO"].tolist()[y]):int(events_left["HS"].tolist()[y])],
-                       line_l, linewidth=3, color=color_l_2)
+                       line_l, linewidth=3, color=color_l)
             # ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])]) * coef,
               #         t[int(events_left["HS"].tolist()[y]):int(events_left["TO"].tolist()[y+1])],
                #        line_l, linewidth=3, color=color_l)
