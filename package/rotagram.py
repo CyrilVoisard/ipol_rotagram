@@ -54,12 +54,11 @@ def rotagram(steps_lim_bis, seg_lim, data_lb, output):
 
 
     # rotation plot for each stance phase
-    for y in range(len(events_right)):
-        if y != len(events_right)-1:
-            if inside(events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1], seg_lim):
+    for y in range(len(events_right)-1):
+        if inside(events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1], seg_lim):
             # plot
-                leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
-                leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=linewidth, color=color_r)
+            leg_rf = ([events_right["HS"].tolist()[y], events_right["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
+            leg1 = ax[2].plot([0, 0], leg_rf, line_r, linewidth=linewidth, color=color_r)
         if inside(events_right["TO"].tolist()[y], events_right["HS"].tolist()[y], seg_lim):
             """
             ax[0].plot(np.cumsum(sc[int(events_right["HS"].tolist()[y]):int(events_right["TO"].tolist()[y+1])]) * coef,
@@ -70,12 +69,11 @@ def rotagram(steps_lim_bis, seg_lim, data_lb, output):
                        t[int(events_right["TO"].tolist()[y]):int(events_right["HS"].tolist()[y])],
                        line_r, linewidth=linewidth, color=color_r)
 
-    for y in range(len(events_left)):
-        if y != len(events_left)-1:
-            if inside(events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1], seg_lim):
+    for y in range(len(events_left)-1):
+        if inside(events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1], seg_lim):
             # leg_lf = ([events_left["HS"].tolist()[y]  - len(data_lb), events_left["TO"].tolist()[y+1] - len(data_lb)] - seg_lim.iloc[1, 0]) / 100
-                leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
-                leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=linewidth, color=color_l)
+            leg_lf = ([events_left["HS"].tolist()[y], events_left["TO"].tolist()[y+1]] - seg_lim.iloc[1, 0]) / 100
+            leg2 = ax[1].plot([0, 0], leg_lf, line_r, linewidth=linewidth, color=color_l)
         if inside(events_left["TO"].tolist()[y], events_left["HS"].tolist()[y], seg_lim):
             """
             ax[0].plot(np.cumsum(sc[int(events_left["HS"].tolist()[y] - len(data_lb)):int(events_left["TO"].tolist()[y+1] - len(data_lb))]) * coef,
